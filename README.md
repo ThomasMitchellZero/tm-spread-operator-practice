@@ -1,2 +1,2 @@
-# tm-spread-operator-practice
+# tm-es6-spread-operator-practice
 Created with CodeSandbox

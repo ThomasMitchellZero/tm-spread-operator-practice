@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 function ListItem(props) {
-  return <li>{props.content}</li>;
+  const [statusClass, changeStatus] = useState("active");
+
+  function handleClick(event) {
+    let status = event.target.className;
+    console.log(status);
+    if (status === "active") {
+      changeStatus("inactive");
+    } else {
+      changeStatus("active");
+    }
+  }
+
+  return (
+    <div onClick={handleClick}>
+      <li className={statusClass}>{props.content}</li>
+    </div>
+  );
 }
 
 export default ListItem;

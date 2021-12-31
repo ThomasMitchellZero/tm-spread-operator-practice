@@ -1,42 +1,24 @@
 import React, { useState } from "react";
 import ListItem from "./ListItem";
-//import InputField from "./InputField";
 
 function App() {
-  const [listState, modifyState] = useState({
-    arrayList: [
-      { key: 0, content: "juice" },
-      { key: 1, content: "spinach" }
-    ],
-    inputText: ""
-  });
+  const [inputText, setInputText] = useState("");
+  const [listArray, setListArray] = useState([]);
 
   function handleChange(event) {
-    event.persist();
-
-    const value = event.target.value;
-
-    modifyState((currentState) => {
-      //console.log(currentState);
-      return {
-        ...currentState,
-        inputText: value
-      };
-    });
+    const newVal = event.target.value;
+    setInputText(newVal);
   }
 
   function handleClick() {
-    modifyState((currentState) => {
-      const newLI = {
-        key: currentState.arrayList.length,
-        content: currentState.inputText
-      };
-
-      return {
-        arrayList: [...currentState.arrayList, newLI],
-        inputText: ""
-      };
+    const newLI = {
+      key: listArray.length,
+      content: inputText
+    };
+    setListArray((current) => {
+      return [...current, newLI];
     });
+    setInputText("");
   }
 
   return (
@@ -46,11 +28,8 @@ function App() {
       </div>
 
       <div className="form">
-        <input
-          onChange={handleChange}
-          type="text"
-          value={listState.inputText}
-        />
+        <input onChange={handleChange} type="text" value={inputText} />
+
         <button onClick={handleClick}>
           <span>Add</span>
         </button>
@@ -58,8 +37,15 @@ function App() {
 
       <div>
         <ul>
-          {listState.arrayList.map((arrayItem) => {
-            return <ListItem key={arrayItem.key} content={arrayItem.content} />;
+          {listArray.map((arrayItem) => {
+            console.log(listArray);
+            return (
+              <ListItem
+                key={arrayItem.key}
+                content={arrayItem.content}
+                name="listitem"
+              />
+            );
           })}
         </ul>
       </div>

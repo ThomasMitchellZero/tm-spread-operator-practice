@@ -77,3 +77,8 @@ li {
   position: relative;
   padding: 0.5rem;
 }
+
+.inactive {
+  text-decoration: line-through;
+  color: hsla(260, 2%, 50%, 0.7);
+}
